@@ -1,1 +1,1 @@
-web: gunicorn bookreview.wsgi
+web: gunicorn bookreview.wsgi --bind 0.0.0.0:$PORT

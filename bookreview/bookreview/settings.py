@@ -145,3 +145,10 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+import os
+
+# This makes sure the application listens on the correct port provided by Render
+PORT = os.environ.get('PORT', '8000')
+
+ALLOWED_HOSTS = ['*']  # Adjust this to the domain where you're hosting if needed.
