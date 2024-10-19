@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
+from django.views.generic import TemplateView
 
 # Filter for Book model
 class BookFilter(filters.FilterSet):
@@ -34,8 +35,7 @@ class BookViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [AllowAny]  # Allow anyone to submit reviews
-
+    permission_classes = [AllowAny]  
     def create(self, request, *args, **kwargs):
         """Handle review submission with error handling."""
         try:
@@ -64,3 +64,7 @@ class UserLoginView(APIView):
             token, _ = Token.objects.get_or_create(user=user)
             return Response({"token": token.key})
         return Response({"error": "Invalid credentials"}, status=400)
+
+# Home View for serving React app
+class HomeView(TemplateView):
+    template_name = "index.html"
